@@ -3,6 +3,7 @@
 <suite name="SeleniumTestRailUpdation">
     <test name="Test Basics 1">
         <classes>
+            
             <class name="GoogleTest"/>
         </classes>
     </test> <!-- Test -->
