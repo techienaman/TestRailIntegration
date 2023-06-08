@@ -3,27 +3,47 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 public class GoogleTest{
     public String  testcaseid;
 
+    @Parameters("Browser")
     @Test()
-    public void validateGoogleImage(){
+    public void validateGoogleImage(String browsername){
         testcaseid="1";
-        WebDriverManager.chromedriver().setup();
-        WebDriver driver =new ChromeDriver();
+        WebDriver driver=null;
+        if(browsername.equalsIgnoreCase("Chrome")){
+            WebDriverManager.chromedriver().setup();
+            driver =new ChromeDriver();
+        }
+        else if(browsername.equalsIgnoreCase("Firefox")){
+            WebDriverManager.firefoxdriver().setup();
+          driver =new FirefoxDriver();
+        }
         driver.get("https://www.google.com/");
         driver.findElement(By.xpath("//*[@alt='Google']"));
     }
 
-    @Test
-    public void sendSerachTestToGoogle() {
+
+   @Parameters("Browser")
+   @Test
+    public void sendSerachTestToGoogle(String browsername) {
          testcaseid="2";
-        WebDriverManager.chromedriver().setup();
-        WebDriver driver = new ChromeDriver();
+        WebDriver driver=null;
+        if(browsername.equalsIgnoreCase("Chrome")){
+            WebDriverManager.chromedriver().setup();
+            driver =new ChromeDriver();
+        }
+        else if(browsername.equalsIgnoreCase("Firefox")){
+            WebDriverManager.firefoxdriver().setup();
+            driver =new FirefoxDriver();
+        }
+
         driver.get("https://www.google.com/");
         driver.findElement(By.xpath("//*[@title='Search']"));
     }
